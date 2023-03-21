@@ -10,3 +10,10 @@ dependencies:
   - rasterio
   - pyepsg
   - folium
+
+  - python
+  - geopandas
+  - cartopy
+  - notebook
+  - rasterio
+prefix: C:\Users\e16006469\Anaconda3\envs\egm722
