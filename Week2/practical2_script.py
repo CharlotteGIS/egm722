@@ -7,7 +7,6 @@ import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
 import pandas as pd
 import csv
-import numpy as np
 
 
 
@@ -164,4 +163,9 @@ ax.stock_img()
 # save the figure as map.png, cropped to the axis (bbox_inches='tight'), and a dpi of 300
 myFig.savefig('map_title.png', bbox_inches='tight', dpi=300)
 
-np.savetxt('result.dat', small_lakes, fmt='%9.2f')
+
+#save stats in text file
+with open("stats.txt", "w") as f:
+    f.write(str(small_lakes)+ ' sum')
+    f.write(str(lakesMean)+' mean')
+
