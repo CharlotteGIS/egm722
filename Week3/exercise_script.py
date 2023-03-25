@@ -4,13 +4,23 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from cartopy.feature import ShapelyFeature
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
-
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point, LineString, Polygon
 
 # ---------------------------------------------------------------------------------------------------------------------
 # in this section, write the script to load the data and complete the main part of the analysis.
 # try to print the results to the screen using the format method demonstrated in the workbook
 
 # load the necessary data here and transform to a UTM projection
+wards = gpd.read_file('data_files/NI_Wards.shp')
+roads = gpd.read_file('data_files/NI_roads.shp')
+counties = gpd.read_file('data_files/Counties.shp')
+airports = pd.read_csv('data_files/Airports.csv')
+transport = pd.read_csv('data_files/transport_data.csv')
+
+print(roads.head())
+print(airports.head())
 
 # your analysis goes here...
 
