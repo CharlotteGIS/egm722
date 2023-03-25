@@ -19,8 +19,6 @@ counties = gpd.read_file('data_files/Counties.shp')
 airports = pd.read_csv('data_files/Airports.csv')
 transport = pd.read_csv('data_files/transport_data.csv')
 
-print(roads.head())
-print(airports.head())
 
 # your analysis goes here...
 

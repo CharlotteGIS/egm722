@@ -5,6 +5,10 @@ from cartopy.feature import ShapelyFeature
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
+import pandas as pd
+import csv
+import numpy as np
+
 
 
 # generate matplotlib handles to create a legend of the features we put in our map.
@@ -41,6 +45,22 @@ towns = gpd.read_file(os.path.abspath('data_files/Towns.shp'))
 water = gpd.read_file(os.path.abspath('data_files/Water.shp'))
 rivers = gpd.read_file(os.path.abspath('data_files/Rivers.shp'))
 counties = gpd.read_file(os.path.abspath('data_files/Counties.shp'))
+
+#calculations
+print(water.head(10))
+small_lakes = water.loc[water['Area_km2'] < 10, 'Area_km2'].sum()
+
+lakesMean = water.loc[water['Area_km2']< 10, 'Area_km2'].mean()
+
+
+
+print('Sum of lakes <10 km2: ' + str(small_lakes))
+print('mean :' + str(lakesMean))
+
+print(towns.head(10))
+print(rivers.head(10))
+
+
 
 # create a figure of size 10x10 (representing the page size in inches)
 myFig = plt.figure(figsize=(10, 10))
@@ -129,7 +149,7 @@ gridlines.bottom_labels = False  # turn off the bottom labels
 # add the text labels for the towns
 for ind, row in towns.iterrows():  # towns.iterrows() returns the index and row
     x, y = row.geometry.x, row.geometry.y  # get the x,y location for each town
-    ax.text(x, y, row['TOWN_NAME'].title(), fontsize=8, transform=myCRS)  # use plt.text to place a label at x,y
+    ax.text(x, y, row['TOWN_NAME'].title(), fontsize=10, transform=myCRS, color='red')  # use plt.text to place a label at x,y
 
 
 
@@ -144,11 +164,4 @@ ax.stock_img()
 # save the figure as map.png, cropped to the axis (bbox_inches='tight'), and a dpi of 300
 myFig.savefig('map_title.png', bbox_inches='tight', dpi=300)
 
-
-
-# calculations
-print(towns.head())
-print(counties.head())
-
-print(rivers.head())
-
+np.savetxt('result.dat', small_lakes, fmt='%9.2f')
