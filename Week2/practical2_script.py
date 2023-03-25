@@ -161,7 +161,7 @@ ax.stock_img()
 
 
 # save the figure as map.png, cropped to the axis (bbox_inches='tight'), and a dpi of 300
-myFig.savefig('map_title.png', bbox_inches='tight', dpi=300)
+myFig.savefig('map_color.png', bbox_inches='tight', dpi=300)
 
 
 #save stats in text file
