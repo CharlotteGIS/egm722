@@ -6,8 +6,8 @@ import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import Point, LineString, Polygon
 
+from shapely.geometry import Point, LineString, Polygon
 # ---------------------------------------------------------------------------------------------------------------------
 # in this section, write the script to load the data and complete the main part of the analysis.
 # try to print the results to the screen using the format method demonstrated in the workbook
@@ -19,13 +19,18 @@ counties = gpd.read_file('data_files/Counties.shp')
 airports = pd.read_csv('data_files/Airports.csv')
 transport = pd.read_csv('data_files/transport_data.csv')
 
+print(roads.head())
+print(roads.crs)
 
 # your analysis goes here...
+print(roads.crs.to_json()) # show the representation of the CRS in JSON format
 
 # ---------------------------------------------------------------------------------------------------------------------
 # below here, you may need to modify the script somewhat to create your map.
 # create a crs using ccrs.UTM() that corresponds to our CRS
-myCRS = ccrs.UTM(29)
+roads_itm = roads.to_crs(epsg=2157) # replace XX with the correct EPSG code for Irish Transverse Mercator
+
+print(roads_itm.head())
 # create a figure of size 10x10 (representing the page size in inches
 fig, ax = plt.subplots(1, 1, figsize=(10, 10), subplot_kw=dict(projection=myCRS))
 
